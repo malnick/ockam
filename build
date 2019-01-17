@@ -173,7 +173,8 @@ binary() {
 
 # Run tests
 test() {
-	run_tool go test -v -mod=vendor -cover ./...
+	run_tool go test -v -covermode=count -coverprofile=tmp.cov -mod=vendor -cover ./...
+	run_tool go tool cover -func=tmp.cov; rm tmp.cov
 }
 
 # build ockam binaries for multiple GOOS/GOARCH combination
